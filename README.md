@@ -25,7 +25,8 @@ Create recipes, follow step-by-step cooking guides, like and comment on other pe
 ## 🎥 Demo
 
 <div align="center">
-  <img src="assets/readme/demo.gif" width="300" alt="App Demo" />
+  <img src="assets/readme/demo.gif" width="300" alt="App Demo 1" />
+  <img src="assets/readme/demo2.gif" width="300" alt="App Demo 2" />
 </div>
 
 *Quick walkthrough of the app's main features*
