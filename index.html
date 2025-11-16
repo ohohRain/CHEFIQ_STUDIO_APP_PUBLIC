@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefiQ Studio - AI-Powered Recipe App</title>
+    <meta name="description"
+        content="Create, share, and discover recipes with AI-powered assistance. Your personal cooking companion.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom gradient for hero */
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(17, 17, 17, 0.9) 0%, rgba(17, 17, 17, 1) 100%);
+        }
+
+        .app-shadow {
+            box-shadow: 0 0 60px -15px rgba(52, 211, 153, 0.4);
+        }
+
+        /* Hero image hover animation */
+        .hero-phone-mockup {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-phone-mockup:hover {
+            transform: scale(1.1);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+
+        /* Smooth scroll offset for fixed header */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'chef-green': '#34D399',
+                        'chef-dark': '#111111',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-chef-dark text-gray-200">
+
+    <!-- Header / Navbar -->
+    <header class="fixed w-full z-50 bg-chef-dark/95 backdrop-blur-md border-b border-gray-800/50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="text-2xl font-bold tracking-tight">
+                    CHEF <span class="text-chef-green">iQ</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="pt-16 md:pt-20">
+        <section class="relative overflow-visible hero-gradient min-h-screen flex items-center">
+            <div class="container mx-auto px-6 py-16 md:py-20">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-16">
+                    <!-- Left Content (Text) - Flexible width -->
+                    <div class="flex-1 md:max-w-xl text-center md:text-left space-y-6 md:space-y-8 z-10">
+                        <span class="text-chef-green font-bold uppercase tracking-widest text-sm md:text-base">
+                            Welcome to ChefiQ Studio
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1]">
+                            Your AI-Powered <br><span class="text-chef-green">Culinary Partner</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed">
+                            Discover recipes, create with AI, and master guided cooking with the ChefiQ Studio app and iQ Cooker.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start pt-4">
+                            <a href="#app"
+                                class="bg-chef-green text-black font-bold px-8 py-4 sm:px-10 sm:py-5 rounded-xl hover:bg-green-400 text-lg sm:text-xl shadow-lg shadow-chef-green/30">
+                                Explore Features
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Right Content (3D Phone Mockup) - Flexible with viewport-based sizing -->
+                    <div class="flex-shrink-0 w-full md:w-auto flex justify-center md:justify-end">
+                        <div class="relative w-full max-w-4xl md:max-w-6xl lg:max-w-7xl">
+                            <img src="assets/readme/deviceframes (1)-Picsart-BackgroundRemover.png"
+                                alt="ChefiQ Studio App on iPhone"
+                                class="hero-phone-mockup w-full h-auto drop-shadow-[0_0_80px_rgba(52,211,153,0.3)]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Showcase Section -->
+        <section id="app" class="py-16 md:py-24 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <!-- Recipe Feed -->
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+                    <div class="md:pr-12">
+                        <span class="text-chef-green font-semibold uppercase tracking-wider">Discover Recipes</span>
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                            Explore Amazing Recipes
+                        </h2>
+                        <p class="text-base md:text-lg lg:text-xl text-gray-300 mb-6 max-w-xl">
+                            Browse a beautiful feed of recipes from our community. Find inspiration for your next meal
+                            with stunning food photography and detailed instructions.
+                        </p>
+                        <ul class="space-y-4 text-gray-300 text-lg">
+                            <li class="flex items-center gap-3">
+                                <span
+                                    class="bg-chef-green/20 text-chef-green rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center">&check;</span>
+                                Like, comment, and save favorites
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span
+                                    class="bg-chef-green/20 text-chef-green rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center">&check;</span>
+                                Follow your favorite creators
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span
+                                    class="bg-chef-green/20 text-chef-green rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center">&check;</span>
+                                Discover trending recipes
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center flex justify-center">
+                        <img src="assets/readme/IMG_4381.PNG" class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl"
+                            alt="ChefiQ Recipe Feed">
+                    </div>
+                </div>
+
+                <!-- Recipe Detail -->
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+                    <div class="text-center order-2 md:order-1 flex justify-center">
+                        <img src="assets/readme/IMG_4382.PNG" class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl"
+                            alt="Recipe Detail View">
+                    </div>
+                    <div class="md:pl-12 order-1 md:order-2">
+                        <span class="text-chef-green font-semibold uppercase tracking-wider">Complete Details</span>
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                            Every Detail Matters
+                        </h2>
+                        <p class="text-lg md:text-xl text-gray-300 mb-8">
+                            Every recipe includes complete details: ingredients, cooking time, difficulty level, and
+                            equipment needed. See nutritional information and user reviews.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Creation Mode -->
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+                    <div class="md:pr-12">
+                        <span class="text-chef-green font-semibold uppercase tracking-wider">Your Way</span>
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                            Create Your Way
+                        </h2>
+                        <p class="text-lg md:text-xl text-gray-300 mb-8">
+                            Choose between AI Smart Input for quick recipe creation or Manual Input for full control.
+                            Let AI help structure your recipes or create them traditionally - you decide.
+                        </p>
+                    </div>
+                    <div class="text-center flex justify-center">
+                        <img src="assets/readme/IMG_4388.PNG" class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl"
+                            alt="Creation Mode Options">
+                    </div>
+                </div>
+
+                <!-- AI Assistant & Personalized Recipes -->
+                <div class="space-y-16">
+                    <!-- AI Chat -->
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="text-center order-2 md:order-1 flex justify-center">
+                            <img src="assets/readme/IMG_4384.PNG"
+                                class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl" alt="AI Chat Interface">
+                        </div>
+                        <div class="md:pl-12 order-1 md:order-2">
+                            <span class="text-chef-green font-semibold uppercase tracking-wider">AI Assistant</span>
+                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                                Chat with Your AI Chef
+                            </h2>
+                            <p class="text-lg md:text-xl text-gray-300 mb-8">
+                                Just tell our AI what ingredients you have at home. It understands your preferences,
+                                dietary restrictions, and cooking skill level. Our AI analyzes your ingredients and
+                                recommends 3 personalized recipe options based on your preferences and cuisine style.
+                                Each suggestion includes complete cooking instructions, timing, and equipment
+                                requirements.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- AI Recipe Suggestions -->
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="md:pr-12">
+                            <span class="text-chef-green font-semibold uppercase tracking-wider">Personalized
+                                Recommendations</span>
+                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                                3 Perfect Recipe Options
+                            </h2>
+                            <p class="text-lg md:text-xl text-gray-300 mb-8">
+                                Get instant access to three carefully curated recipe suggestions tailored to your
+                                available ingredients, cooking preferences, and skill level. Each option comes with
+                                detailed instructions and timing to ensure perfect results every time.
+                            </p>
+                        </div>
+                        <div class="text-center flex justify-center">
+                            <img src="assets/readme/IMG_4386.PNG"
+                                class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl" alt="AI Recipe Suggestions">
+                        </div>
+                    </div>
+
+                    <!-- Chef iQ Equipment Integration -->
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="text-center order-2 md:order-1 flex justify-center">
+                            <img src="assets/readme/IMG_4387.PNG"
+                                class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl"
+                                alt="Chef iQ Equipment Purchase">
+                        </div>
+                        <div class="md:pl-12 order-1 md:order-2">
+                            <span class="text-chef-green font-semibold uppercase tracking-wider">Seamless
+                                Shopping</span>
+                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                                One-Tap Equipment Purchase
+                            </h2>
+                            <p class="text-lg md:text-xl text-gray-300 mb-8">
+                                When a recipe requires Chef iQ equipment like the iQ Cooker, simply tap to purchase
+                                directly through the app. Seamlessly integrate premium cooking tools into your culinary
+                                journey.
+                            </p>
+                            <ul class="space-y-4 text-gray-300 text-lg">
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="bg-chef-green/20 text-chef-green rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center">&check;</span>
+                                    Equipment suggestions based on recipes
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="bg-chef-green/20 text-chef-green rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center">&check;</span>
+                                    Quick purchase integration
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span
+                                        class="bg-chef-green/20 text-chef-green rounded-full w-7 h-7 flex-shrink-0 flex items-center justify-center">&check;</span>
+                                    Automatic recipe sync to devices
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center items-center text-center">
+                <!-- Logo -->
+                <div>
+                    <a href="#" class="text-3xl font-bold tracking-tight">
+                        CHEF <span class="text-chef-green">iQ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpen = document.getElementById('menu-open');
+        const menuClose = document.getElementById('menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuOpen.classList.toggle('hidden');
+            menuClose.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuOpen.classList.remove('hidden');
+                menuClose.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add active state to navbar on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
