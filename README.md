@@ -2,6 +2,8 @@
 
 A mobile app for creating and sharing recipes, with AI help when you want it. Built with React Native and Firebase.
 
+🌐 **[View Landing Page](https://ohohrain.github.io/CHEFIQ_STUDIO_APP_PUBLIC/)**
+
 ## What It Does
 
 Create recipes, follow step-by-step cooking guides, like and comment on other people's recipes. You can type in ingredients you have and get recipe ideas from AI, or just create your own from scratch.
@@ -33,7 +35,26 @@ Create recipes, follow step-by-step cooking guides, like and comment on other pe
 
 ## Tech Stack
 
-React Native + Expo, Firebase backend, OpenAI for the AI stuff. Pretty standard mobile app setup.
+**Frontend:**
+- **React Native + Expo** - Cross-platform mobile development framework for iOS and Android
+- **React Navigation** - Stack and tab navigation with smooth transitions
+- **React Native Paper** - Material Design components for polished UI
+- **React Context API** - State management for auth, theme, likes, and more
+
+**Backend:**
+- **Firebase Authentication** - Email and Google sign-in with secure session management
+- **Cloud Firestore** - NoSQL database for recipes, comments, likes, and user data
+- **Firebase Storage** - Image hosting for recipe photos and user avatars
+- **Cloud Functions** - Serverless functions for comment notifications and data processing
+
+**AI Integration:**
+- **OpenAI GPT** - Recipe generation from ingredients and cooking assistance
+- **Custom prompts** - Optimized for recipe creation and culinary suggestions
+
+**Developer Experience:**
+- **Expo Go** - Instant preview on physical devices during development
+- **Firebase Emulators** - Local testing environment for backend services
+- **ESLint** - Code quality and consistency checks
 
 ## Getting Started
 
