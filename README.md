@@ -11,10 +11,11 @@ Create recipes, follow step-by-step cooking guides, like and comment on other pe
 <div align="center">
   <img src="assets/readme/IMG_4381.PNG" width="250" alt="Home Feed" />
   <img src="assets/readme/IMG_4382.PNG" width="250" alt="Recipe Detail" />
-  <img src="assets/readme/IMG_4384.PNG" width="250" alt="AI Recipe Chat" />
+  <img src="assets/readme/IMG_4388.PNG" width="250" alt="Creation Mode" />
 </div>
 
 <div align="center">
+  <img src="assets/readme/IMG_4384.PNG" width="250" alt="AI Recipe Chat" />
   <img src="assets/readme/IMG_4386.PNG" width="250" alt="AI-Generated Recipe" />
   <img src="assets/readme/IMG_4387.PNG" width="250" alt="iQ Cooker Integration" />
 </div>
