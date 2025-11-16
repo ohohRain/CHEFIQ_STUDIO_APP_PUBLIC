@@ -6,6 +6,29 @@ A mobile app for creating and sharing recipes, with AI help when you want it. Bu
 
 Create recipes, follow step-by-step cooking guides, like and comment on other people's recipes. You can type in ingredients you have and get recipe ideas from AI, or just create your own from scratch.
 
+## 📱 App Preview
+
+<div align="center">
+  <img src="assets/readme/IMG_4381.PNG" width="250" alt="Home Feed" />
+  <img src="assets/readme/IMG_4382.PNG" width="250" alt="Recipe Detail" />
+  <img src="assets/readme/IMG_4384.PNG" width="250" alt="AI Recipe Chat" />
+</div>
+
+<div align="center">
+  <img src="assets/readme/IMG_4386.PNG" width="250" alt="AI-Generated Recipe" />
+  <img src="assets/readme/IMG_4387.PNG" width="250" alt="iQ Cooker Integration" />
+</div>
+
+*Browse recipes, view details, get AI suggestions from ingredients, and discover smart cooking equipment.*
+
+## 🎥 Demo
+
+<div align="center">
+  <img src="assets/readme/demo.gif" width="300" alt="App Demo" />
+</div>
+
+*Quick walkthrough of the app's main features*
+
 ## Tech Stack
 
 React Native + Expo, Firebase backend, OpenAI for the AI stuff. Pretty standard mobile app setup.
