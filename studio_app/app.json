@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "iQ Studio",
+    "slug": "chefmanstudioapp",
+    "scheme": "iqstudio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.chefiqstudioapp",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "iqstudio"
+            ]
+          }
+        ],
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPhotoLibraryUsageDescription": "iQ Studio needs access to your photo library to let you upload recipe images and update your profile picture.",
+        "NSCameraUsageDescription": "iQ Studio needs access to your camera to let you take photos for your recipes and profile."
+      },
+      "usesAppleSignIn": true
+    },
+    "android": {
+      "package": "com.chefiqstudioapp",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-apple-authentication"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b0101190-7847-42e7-bdb9-1d61081c5ffa"
+      }
+    },
+    "owner": "chefmanstudioapp",
+    "updates": {
+      "url": "https://u.expo.dev/b0101190-7847-42e7-bdb9-1d61081c5ffa",
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 0
+    },
+    "runtimeVersion": "1.0.0"
+  }
+}

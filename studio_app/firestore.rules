@@ -1,0 +1,159 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      // Anyone can read user profiles (for viewing other users)
+      allow read: if true;
+
+      // Only the user can create/update their own profile
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isOwner(userId);
+
+      // Only the user can delete their own profile
+      allow delete: if isOwner(userId);
+    }
+
+    // Recipes collection
+    match /recipes/{recipeId} {
+      // Anyone can read published recipes
+      allow read: if resource.data.status == 'published' || isOwner(resource.data.authorId);
+
+      // Only authenticated users can create recipes
+      allow create: if isAuthenticated() && request.resource.data.authorId == request.auth.uid;
+
+      // Only the author can update their own recipes
+      // EXCEPTION: Any authenticated user can increment stats.viewsCount (pageview tracking)
+      // IMPORTANT: Other stats fields (likesCount, commentsCount, savesCount) handled by Cloud Functions
+      allow update: if isOwner(resource.data.authorId) &&
+                       !request.resource.data.diff(resource.data)
+                         .affectedKeys().hasAny(['stats'])
+                    ||
+                    (isAuthenticated() &&
+                     request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stats']) &&
+                     request.resource.data.stats.diff(resource.data.stats).affectedKeys().hasOnly(['viewsCount']) &&
+                     request.resource.data.stats.viewsCount > resource.data.stats.viewsCount);
+
+      // Only the author can delete their own recipes
+      allow delete: if isOwner(resource.data.authorId);
+    }
+
+    // Likes collection (TOP-LEVEL, not subcollection)
+    // Phase 8: Like System
+    match /likes/{likeId} {
+      // Anyone can read likes (for displaying like status and counts)
+      allow read: if true;
+
+      // Only authenticated users can like, and only for themselves
+      // Composite key validation: {userId}_{recipeId}
+      allow create: if isAuthenticated() &&
+                       request.resource.data.userId == request.auth.uid &&
+                       likeId == request.auth.uid + '_' + request.resource.data.recipeId;
+
+      // Only the owner can delete their own like
+      allow delete: if isAuthenticated() && isOwner(resource.data.userId);
+    }
+
+    // Comments collection (TOP-LEVEL, not subcollection)
+    // Phase 12: Comment System
+    match /comments/{commentId} {
+      // Anyone can read comments
+      allow read: if true;
+
+      // Only authenticated users can create comments
+      allow create: if isAuthenticated() &&
+                       request.resource.data.authorId == request.auth.uid;
+
+      // Comments cannot be edited, only deleted by owner
+      allow update: if false;
+      allow delete: if isAuthenticated() && isOwner(resource.data.authorId);
+    }
+
+    // Comment Likes collection (TOP-LEVEL, not subcollection)
+    // Phase 12: Comment System
+    match /comment_likes/{likeId} {
+      // Anyone can read comment likes (for displaying like status and counts)
+      allow read: if true;
+
+      // Only authenticated users can like comments, and only for themselves
+      // Composite key validation: {userId}_{commentId}
+      allow create: if isAuthenticated() &&
+                       request.resource.data.userId == request.auth.uid &&
+                       likeId == request.auth.uid + '_' + request.resource.data.commentId;
+
+      // Only the owner can delete their own comment like
+      allow delete: if isAuthenticated() && isOwner(resource.data.userId);
+    }
+
+    // Collections (saved recipe collections)
+    match /collections/{collectionId} {
+      // Only the owner can read their collections
+      allow read: if isOwner(resource.data.userId);
+
+      // Only authenticated users can create collections
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+
+      // Only the owner can update/delete their collections
+      // Cannot delete default collection (checked in client, but enforced here too)
+      allow update: if isOwner(resource.data.userId);
+      allow delete: if isOwner(resource.data.userId) && resource.data.isDefault == false;
+    }
+
+    // Collection Recipes (junction table for saved recipes)
+    // Phase 9.2: Collections & Save System
+    match /collection_recipes/{documentId} {
+      // Only the owner can read their saved recipes
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+
+      // Only authenticated users can save recipes
+      // Composite key validation: {collectionId}_{recipeId}
+      allow create: if isAuthenticated() &&
+                       request.resource.data.userId == request.auth.uid &&
+                       documentId == request.resource.data.collectionId + '_' + request.resource.data.recipeId;
+
+      // Only the owner can remove saved recipes
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Follows collection
+    match /follows/{followId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.followerId;
+    }
+
+    // Notifications collection
+    // Phase 12: Notifications System
+    match /notifications/{notificationId} {
+      // Only the recipient can read their own notifications
+      allow read: if isAuthenticated() && resource.data.recipientId == request.auth.uid;
+
+      // Only authenticated users can create notifications (typically via Cloud Functions)
+      // Allow creation if user is authenticated (functions use admin SDK, but clients can create some types)
+      allow create: if isAuthenticated();
+
+      // Only the recipient can update their notifications (mark as read/unread)
+      allow update: if isAuthenticated() && resource.data.recipientId == request.auth.uid;
+
+      // Only the recipient can delete their notifications
+      allow delete: if isAuthenticated() && resource.data.recipientId == request.auth.uid;
+    }
+
+    // Default deny all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
