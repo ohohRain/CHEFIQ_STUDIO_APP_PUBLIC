@@ -55,6 +55,18 @@
             scroll-behavior: smooth;
             scroll-padding-top: 80px;
         }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
     <script>
         tailwind.config = {
@@ -125,8 +137,8 @@
                 <!-- Recipe Feed -->
                 <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
                     <div class="md:pr-12">
-                        <span class="text-chef-green font-semibold uppercase tracking-wider">Discover Recipes</span>
-                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                        <span class="scroll-animate text-chef-green font-semibold uppercase tracking-wider">Discover Recipes</span>
+                        <h2 class="scroll-animate text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
                             Explore Amazing Recipes
                         </h2>
                         <p class="text-base md:text-lg lg:text-xl text-gray-300 mb-6 max-w-xl">
@@ -164,8 +176,8 @@
                             alt="Recipe Detail View">
                     </div>
                     <div class="md:pl-12 order-1 md:order-2">
-                        <span class="text-chef-green font-semibold uppercase tracking-wider">Complete Details</span>
-                        <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                        <span class="scroll-animate text-chef-green font-semibold uppercase tracking-wider">Complete Details</span>
+                        <h2 class="scroll-animate text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
                             Every Detail Matters
                         </h2>
                         <p class="text-lg md:text-xl text-gray-300 mb-8">
@@ -178,8 +190,8 @@
                 <!-- Creation Mode -->
                 <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
                     <div class="md:pr-12">
-                        <span class="text-chef-green font-semibold uppercase tracking-wider">Your Way</span>
-                        <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                        <span class="scroll-animate text-chef-green font-semibold uppercase tracking-wider">Your Way</span>
+                        <h2 class="scroll-animate text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
                             Create Your Way
                         </h2>
                         <p class="text-lg md:text-xl text-gray-300 mb-8">
@@ -202,8 +214,8 @@
                                 class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl" alt="AI Chat Interface">
                         </div>
                         <div class="md:pl-12 order-1 md:order-2">
-                            <span class="text-chef-green font-semibold uppercase tracking-wider">AI Assistant</span>
-                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                            <span class="scroll-animate text-chef-green font-semibold uppercase tracking-wider">AI Assistant</span>
+                            <h2 class="scroll-animate text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
                                 Chat with Your AI Chef
                             </h2>
                             <p class="text-lg md:text-xl text-gray-300 mb-8">
@@ -219,9 +231,9 @@
                     <!-- AI Recipe Suggestions -->
                     <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                         <div class="md:pr-12">
-                            <span class="text-chef-green font-semibold uppercase tracking-wider">Personalized
+                            <span class="scroll-animate text-chef-green font-semibold uppercase tracking-wider">Personalized
                                 Recommendations</span>
-                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                            <h2 class="scroll-animate text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
                                 3 Perfect Recipe Options
                             </h2>
                             <p class="text-lg md:text-xl text-gray-300 mb-8">
@@ -244,9 +256,9 @@
                                 alt="Chef iQ Equipment Purchase">
                         </div>
                         <div class="md:pl-12 order-1 md:order-2">
-                            <span class="text-chef-green font-semibold uppercase tracking-wider">Seamless
+                            <span class="scroll-animate text-chef-green font-semibold uppercase tracking-wider">Seamless
                                 Shopping</span>
-                            <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+                            <h2 class="scroll-animate text-3xl md:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
                                 One-Tap Equipment Purchase
                             </h2>
                             <p class="text-lg md:text-xl text-gray-300 mb-8">
@@ -294,26 +306,28 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle - only initialize if elements exist
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuOpen = document.getElementById('menu-open');
         const menuClose = document.getElementById('menu-close');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            menuOpen.classList.toggle('hidden');
-            menuClose.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                menuOpen.classList.remove('hidden');
-                menuClose.classList.add('hidden');
+        if (mobileMenuBtn && mobileMenu && menuOpen && menuClose) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                menuOpen.classList.toggle('hidden');
+                menuClose.classList.toggle('hidden');
             });
-        });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    menuOpen.classList.remove('hidden');
+                    menuClose.classList.add('hidden');
+                });
+            });
+        }
 
         // Smooth scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -329,11 +343,59 @@
         // Add active state to navbar on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-lg');
-            } else {
-                header.classList.remove('shadow-lg');
+            if (header) {
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-lg');
+                } else {
+                    header.classList.remove('shadow-lg');
+                }
             }
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize scroll animations on DOM ready
+        function initScrollAnimations() {
+            const animateElements = document.querySelectorAll('.scroll-animate');
+
+            // Check which elements are already visible on page load
+            animateElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                // If element is in viewport on load, show it immediately
+                if (rect.top >= 0 && rect.top <= windowHeight) {
+                    el.classList.add('animate-in');
+                } else {
+                    // Otherwise, observe it for later animation
+                    observer.observe(el);
+                }
+            });
+        }
+
+        // Run on page load with multiple triggers to ensure it executes
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initScrollAnimations);
+        } else {
+            // DOM already loaded
+            initScrollAnimations();
+        }
+
+        // Backup trigger after a short delay
+        window.addEventListener('load', () => {
+            setTimeout(initScrollAnimations, 50);
         });
     </script>
 
