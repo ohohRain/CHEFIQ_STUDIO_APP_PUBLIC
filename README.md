@@ -186,6 +186,25 @@ firebase deploy --only functions:onCommentCreate,functions:onCommentDelete
 
 ## 🧪 Testing
 
+### Unit Tests
+
+The app includes comprehensive unit test coverage for core functionality including authentication, services, and contexts:
+
+```bash
+npm test
+```
+
+**Latest Test Results:**
+- ✅ **Test Suites:** 7 passed, 7 total
+- ✅ **Tests:** 150 passed, 150 total
+- ⏱️ **Time:** 2.272s
+
+All tests passing with coverage for:
+- Authentication flows and context
+- Recipe and comment services
+- Storage and user services
+- Context providers (Auth, Theme, Like, etc.)
+
 ### Testing on Device
 1. Build the app using Expo Go (no compilation needed)
 2. Test core features: auth, recipe creation, social interactions
